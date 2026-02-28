@@ -73,9 +73,12 @@ export default function OnboardingForm() {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={(e) => e.preventDefault()}
       onKeyDown={(e) => {
-        if (e.key === "Enter" && e.target instanceof HTMLInputElement) {
+        if (
+          e.key === "Enter" &&
+          !(e.target instanceof HTMLTextAreaElement)
+        ) {
           e.preventDefault();
         }
       }}
@@ -123,7 +126,8 @@ export default function OnboardingForm() {
           </button>
         ) : (
           <button
-            type="submit"
+            type="button"
+            onClick={handleSubmit(onSubmit)}
             className="rounded-lg bg-linear-to-r from-emerald-600 to-emerald-500 px-8 py-2.5 font-medium text-white shadow-sm transition-all hover:from-emerald-500 hover:to-emerald-600 hover:shadow-md"
           >
             Submit
