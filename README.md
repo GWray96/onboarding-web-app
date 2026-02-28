@@ -20,6 +20,14 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Supabase Setup
+
+1. Create a project at [supabase.com](https://supabase.com).
+2. Copy `.env.example` to `.env.local` and add your project URL and anon key from **Project Settings → API**.
+3. Run the migration: In Supabase Dashboard → **SQL Editor**, run the contents of `supabase/migrations/20250228000000_create_onboarding_submissions.sql`.
+
+Form submissions are stored in the `onboarding_submissions` table. View them in **Table Editor**.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
