@@ -1,6 +1,17 @@
 import OnboardingForm from "@/components/OnboardingForm";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    redirect("/login");
+  }
+
   return (
     <div className="min-h-screen bg-emerald-50/70">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(167,243,208,0.5),transparent)]" />

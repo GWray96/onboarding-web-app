@@ -32,6 +32,19 @@ export default function LoginPage() {
     setLoading(true);
     const supabase = createClient();
 
+    const { data: isAllowed, error: allowError } = await supabase.rpc(
+      "is_email_allowed",
+      { p_email: email.trim().toLowerCase() }
+    );
+
+    if (allowError || !isAllowed) {
+      setInlineError(
+        "If you're an approved client, please double-check your email or contact us and we'll help you get access."
+      );
+      setLoading(false);
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
