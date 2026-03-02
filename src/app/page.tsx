@@ -8,18 +8,9 @@ export default function Home() {
       <div className="absolute bottom-1/4 left-0 -z-10 h-64 w-64 rounded-full bg-emerald-100/40 blur-3xl" />
       <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
         <header className="mb-12 text-center">
-          <a
-            href="https://garethrswray.com"
-            className="inline-block text-xl font-semibold tracking-tight text-emerald-800 transition-colors hover:text-emerald-600"
-          >
-            Gareth Wray
-          </a>
-          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-amber-200/80 bg-amber-50/80 px-4 py-1.5 text-sm text-amber-800">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
-            </span>
-            Digital marketing — growth on subscription
+          <div className="inline-flex items-center gap-3 rounded-full border border-emerald-200/90 bg-emerald-50/80 px-6 py-2.5 text-sm text-emerald-800">
+            <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
+            Gareth Wray — Digital Marketing &amp; Growth Specialist
           </div>
           <h1 className="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl">
             Client Onboarding
