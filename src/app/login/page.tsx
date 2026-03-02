@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
@@ -9,17 +8,23 @@ export default function LoginPage() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [inlineError, setInlineError] = useState<string | null>(null);
-  const searchParams = useSearchParams();
-  const error = searchParams.get("error");
+  const [urlErrorMessage, setUrlErrorMessage] = useState<string | null>(null);
 
-  let errorMessage: string | null = null;
-  if (error === "missing_code") {
-    errorMessage =
-      "The login link is missing a code. Please request a new magic link.";
-  } else if (error === "auth_failed") {
-    errorMessage =
-      "That login link is invalid or has expired. Please request a new magic link.";
-  }
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("error");
+
+    if (error === "missing_code") {
+      setUrlErrorMessage(
+        "The login link is missing a code. Please request a new magic link.",
+      );
+    } else if (error === "auth_failed") {
+      setUrlErrorMessage(
+        "That login link is invalid or has expired. Please request a new magic link.",
+      );
+    }
+  }, []);
 
   const handleLogin = async () => {
     if (!email) return;
@@ -76,9 +81,9 @@ export default function LoginPage() {
         <p className="mb-6 text-sm text-slate-600">
           Enter your email to access your onboarding.
         </p>
-        {(errorMessage || inlineError) && (
+        {(urlErrorMessage || inlineError) && (
           <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
-            {inlineError ?? errorMessage}
+            {inlineError ?? urlErrorMessage}
           </div>
         )}
         <input
